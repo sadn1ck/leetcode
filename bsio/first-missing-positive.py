@@ -1,16 +1,20 @@
 """
-Given a sorted unique integer list of size n in increasing order, find the first positive integer between [1, n+1] not in the array.
-
+Given a list of integers nums, find the first missing positive integer. 
+In other words, find the lowest positive integer that does not exist in the array. 
+The array can contain duplicates and negative numbers as well.
 """
 
 
 class Solution:
-    def solve(self, arr):
-        n = len(arr) + 1
-        unique = set(arr)
-        print(n)
-
-        for value in range(1, n):
-            if value not in unique:
-                return value
-        return arr[-1] + 1
+    def solve(self, nums):
+        store = dict()
+        mx = 0
+        for i in nums:
+            if i not in store:
+                store[i] = 1
+                mx = max(mx, i)
+        # print(mx, store)
+        for i in range(1, mx+1):
+            if i not in store:
+                return i
+        return mx + 1
